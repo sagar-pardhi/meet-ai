@@ -37,6 +37,18 @@ export const AgentForm = ({
     trpc.agents.create.mutationOptions({
       onSuccess(data, variables, context) {
         queryClient.invalidateQueries(trpc.agents.getMany.queryOptions({}));
+        onSuccess?.();
+      },
+      onError(error, variables, context) {
+        toast.error(error.message);
+      },
+    })
+  );
+
+  const updateAgent = useMutation(
+    trpc.agents.update.mutationOptions({
+      onSuccess(data, variables, context) {
+        queryClient.invalidateQueries(trpc.agents.getMany.queryOptions({}));
 
         if (initialValues?.id) {
           queryClient.invalidateQueries(
@@ -60,11 +72,11 @@ export const AgentForm = ({
   });
 
   const isEdit = !!initialValues?.id;
-  const isPending = createAgent.isPending;
+  const isPending = createAgent.isPending || updateAgent.isPending;
 
   const onSubmit = (values: z.infer<typeof agentsInsertSchema>) => {
     if (isEdit) {
-      console.log("edit agent", values);
+      updateAgent.mutate({ id: initialValues.id, ...values });
     } else {
       createAgent.mutate(values);
     }
