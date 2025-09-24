@@ -9,11 +9,11 @@ import React, { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 const MeetingsPage = () => {
-  const quertClient = getQueryClient();
-  void quertClient.prefetchQuery(trpc.meetings.getMany.queryOptions({}));
+  const queryClient = getQueryClient();
+  void queryClient.prefetchQuery(trpc.meetings.getMany.queryOptions({}));
 
   return (
-    <HydrationBoundary state={dehydrate(quertClient)}>
+    <HydrationBoundary state={dehydrate(queryClient)}>
       <Suspense fallback={<MeetingsViewLoading />}>
         <ErrorBoundary fallback={<MeetingsViewError />}>
           <MeetingsView />
