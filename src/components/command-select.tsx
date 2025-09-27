@@ -17,7 +17,7 @@ interface CommandSelectProps {
     children: ReactNode;
   }>;
   onSelect: (value: string) => void;
-  onSearch: (value: string) => void;
+  onSearch?: (value: string) => void;
   value: string;
   placeholder?: string;
   isSearchable?: boolean;
@@ -36,6 +36,11 @@ export const CommandSelect = ({
   const [open, setOpen] = useState(false);
   const selectedOption = options.find((option) => option.value === value);
 
+  const handleOpenChange = (value: boolean) => {
+    onSearch?.("");
+    setOpen(value);
+  };
+
   return (
     <>
       <Button
@@ -53,13 +58,15 @@ export const CommandSelect = ({
       </Button>
       <CommandResponsiveDialog
         open={open}
-        onOpenChange={setOpen}
+        onOpenChange={handleOpenChange}
         shouldFilter={!onSearch}
       >
         <CommandInput placeholder="Search..." onValueChange={onSearch} />
         <CommandList>
-          <CommandEmpty className="text-muted-foreground text-sm">
-            <span>No option found</span>
+          <CommandEmpty>
+            <span className="text-muted-foreground text-sm">
+              No option found
+            </span>
           </CommandEmpty>
           {options.map((option) => (
             <CommandItem
