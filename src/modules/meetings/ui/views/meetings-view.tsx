@@ -31,7 +31,7 @@ export const MeetingsView = () => {
       <DataPagination
         page={filters.page}
         totalPages={data.totalPages}
-        onPagechange={(page) => setFilters({ page })}
+        onPageChange={(page) => setFilters({ page })}
       />
       {data.items.length === 0 && (
         <EmptyState
