@@ -3,13 +3,13 @@ import { Button } from "@/components/ui/button";
 interface DataPaginationProps {
   page: number;
   totalPages: number;
-  onPagechange: (page: number) => void;
+  onPageChange: (page: number) => void;
 }
 
 export const DataPagination = ({
   page,
   totalPages,
-  onPagechange,
+  onPageChange,
 }: DataPaginationProps) => {
   return (
     <div className="flex items-center justify-between">
@@ -21,7 +21,7 @@ export const DataPagination = ({
           disabled={page === 1}
           variant="outline"
           size="sm"
-          onClick={() => onPagechange(Math.max(1, page - 1))}
+          onClick={() => onPageChange(Math.max(1, page - 1))}
         >
           Previous
         </Button>
@@ -29,7 +29,7 @@ export const DataPagination = ({
           disabled={page === totalPages || totalPages === 0}
           variant="outline"
           size="sm"
-          onClick={() => onPagechange(Math.min(totalPages, page + 1))}
+          onClick={() => onPageChange(Math.min(totalPages, page + 1))}
         >
           Next
         </Button>

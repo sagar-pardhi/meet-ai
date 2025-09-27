@@ -7,9 +7,9 @@ import { useTRPC } from "@/trpc/client";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useAgentsFilters } from "../../hooks/use-agents-filter";
 import { columns } from "../components/columns";
-import { DataPagination } from "../components/data-pagination";
 import { useRouter } from "next/navigation";
 import { DataTable } from "@/components/data-table";
+import { DataPagination } from "@/components/data-pagination";
 
 export const AgentsView = () => {
   const router = useRouter();
@@ -31,7 +31,7 @@ export const AgentsView = () => {
       <DataPagination
         page={filters.page}
         totalPages={data.totalPages}
-        onPagechange={(page) => setFilters({ page })}
+        onPageChange={(page) => setFilters({ page })}
       />
       {data.items.length === 0 && (
         <EmptyState
