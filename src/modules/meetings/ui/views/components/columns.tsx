@@ -2,7 +2,10 @@
 
 import { GeneratedAvatar } from "@/components/generated-avatar";
 import { Badge } from "@/components/ui/badge";
+import { cn, formatDuration } from "@/lib/utils";
+import { MeetingGetMany } from "@/modules/meetings/types";
 import { ColumnDef } from "@tanstack/react-table";
+import { format } from "date-fns";
 import {
   CircleCheckIcon,
   CircleXIcon,
@@ -10,20 +13,7 @@ import {
   ClockFadingIcon,
   CornerDownRightIcon,
   LoaderIcon,
-  VideoIcon,
 } from "lucide-react";
-import { MeetingGetMany } from "@/modules/meetings/types";
-import { format } from "date-fns";
-import humanizeDuration from "humanize-duration";
-import { cn } from "@/lib/utils";
-
-const formatDuration = (seconds: number) => {
-  return humanizeDuration(seconds * 1000, {
-    largest: 1,
-    round: true,
-    units: ["h", "m", "s"],
-  });
-};
 
 const statusIconMap = {
   upcoming: ClockArrowUpIcon,
