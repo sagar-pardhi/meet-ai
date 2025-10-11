@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
     const meetingId = event.call.custom?.meetingId;
 
     if (!meetingId) {
-      return NextResponse.json({ error: "Missing meetingId" }, { status: 400 });
+      return NextResponse.json({ error: "Meeting meetingId" }, { status: 400 });
     }
 
     const [existingMeeting] = await db
@@ -100,7 +100,7 @@ export async function POST(req: NextRequest) {
     const meetingId = event.call_cid.split(":")[1];
 
     if (!meetingId) {
-      return NextResponse.json({ error: "Missing meetingId" }, { status: 400 });
+      return NextResponse.json({ error: "Meeting meetingId" }, { status: 400 });
     }
 
     const call = streamVideo.video.call("default", meetingId);
@@ -110,7 +110,7 @@ export async function POST(req: NextRequest) {
     const meetingId = event.call.custom?.meetingId;
 
     if (!meetingId) {
-      return NextResponse.json({ error: "Missing meetingId" }, { status: 400 });
+      return NextResponse.json({ error: "Meeting meetingId" }, { status: 400 });
     }
 
     await db
@@ -133,7 +133,7 @@ export async function POST(req: NextRequest) {
       .returning();
 
     if (!updatedMeeting) {
-      return NextResponse.json({ error: "Missing not found" }, { status: 400 });
+      return NextResponse.json({ error: "Meeting not found" }, { status: 400 });
     }
 
     await inngest.send({
