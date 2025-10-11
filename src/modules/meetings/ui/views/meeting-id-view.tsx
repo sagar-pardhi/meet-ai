@@ -8,16 +8,17 @@ import {
   useQueryClient,
   useSuspenseQuery,
 } from "@tanstack/react-query";
-import { MeetingIdViewHeader } from "./components/meeting-id-view-header";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { toast } from "sonner";
 import { useConfirm } from "../../hooks/use-confirm";
-import { UpdateMeetingDialog } from "./components/update-meeting-dialog";
-import { useState } from "react";
-import { UpcomingState } from "./components/upcoming-state";
 import { ActiveState } from "./components/active-state";
 import { CancelledState } from "./components/cancelled-state";
+import { CompletedState } from "./components/completed-state";
+import { MeetingIdViewHeader } from "./components/meeting-id-view-header";
 import { ProcessingState } from "./components/processing-state";
+import { UpcomingState } from "./components/upcoming-state";
+import { UpdateMeetingDialog } from "./components/update-meeting-dialog";
 
 interface MeetingIdViewProps {
   meetingId: string;
@@ -81,7 +82,7 @@ export const MeetingIdView = ({ meetingId }: MeetingIdViewProps) => {
         />
         {isCancelled && <CancelledState />}
         {isProcessing && <ProcessingState />}
-        {isCompleted && <div>Completed</div>}
+        {isCompleted && <CompletedState data={data} />}
         {isActive && <ActiveState meetingId={meetingId} />}
         {isUpcoming && (
           <UpcomingState
